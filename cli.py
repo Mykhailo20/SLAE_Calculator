@@ -5,6 +5,11 @@ choice_text = """Please, enter the method of entering data:
 1 - keyboard input;
 2 - read from a file.
 Your choice: """
+method_choice = """Please, enter the method of solving the SLAE:
+1 - Gauss method;
+2 - LU method.
+Your choice: """
+
 choice = input(choice_text)
 
 if("1" in choice):
@@ -41,20 +46,29 @@ Please check if the file exists and restart the program.
         for j in range(cols):
             matrix[(i-1)][j] = float(row_coefficients[j])
 
-"""matrix = [[1.26, -2.34, 1.17, 3.14],
-          [0.75, 1.24, -0.48, -1.17],
-          [3.44, -1.85, 1.16, 1.83]]
-"""
-
 print("Initial matrix: ")
 exact_methods.print_matrix(matrix, 3, 4)
 
-print("\nGauss method:")
-roots_list = exact_methods.gauss_method(matrix, 3, 4)
+choice = input(method_choice)
+
+if "1" in choice:
+    print("\nGauss method:")
+    roots_list = exact_methods.gauss_method(matrix, 3, 4)
+
+elif "2" in choice:
+    print("LU - method:")
+    roots_list = exact_methods.lu_method(matrix, 3, 4)
+
+else:
+    print("""You entered the wrong number.
+          Please restart the program and try again!
+          """)
+    exit()
 
 print("\nRoots are: ", end=" ")
 for root in roots_list:
     print("%.5f"%(root), end=" ")
 
 print('\n')
+
 
