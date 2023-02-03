@@ -48,18 +48,18 @@ for row in range(ROWS):
 
 method = st.radio("Select method: ", methods_list)
 
+precision = st.slider("Select the number of digits after comma: ", 0, 8, key="precision")
+
 if st.button("Solve the system"):
     if method == 'Gauss':
-        st.success("Gauss")
         roots_list = exact_methods.gauss_method(matrix, ROWS, COLS)
     elif method == 'LU':
-        st.success("LU")
         roots_list = exact_methods.lu_method(matrix, ROWS, COLS)
 
     # Show result
     result_str = "Roots are: "
     for index, root in enumerate(roots_list):
-        result_str += f"x{index+1} = %.5f" % root
+        result_str += f"x{index+1} = %.{precision}f" % root
         result_str += " "
 
     st.success(result_str)
