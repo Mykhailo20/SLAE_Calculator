@@ -57,12 +57,9 @@ if st.button("Solve the system"):
         roots_list = exact_methods.lu_method(matrix, ROWS, COLS)
 
     # Show result
-    result_str = "Roots are: "
     for index, root in enumerate(roots_list):
-        result_str += f"x{index+1} = %.{precision}f" % root
-        result_str += " "
+        st.success(f"x{index+1} = %.{precision}f" % root)
 
-    st.success(result_str)
 
 
 
