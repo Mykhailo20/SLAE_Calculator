@@ -1,6 +1,6 @@
 import streamlit as st
 from modules import exact_methods
-
+from modules import streamlit_check
 
 ROWS = 3
 COLS = 4
@@ -51,6 +51,7 @@ if input_method == 'File':
                 element_counter += 1
         matrix_fulfilled = True
 
+
 elif input_method == 'Keyboard':
     matrix_fulfilled = False
     matrix = [[0 for j in range(COLS)] for i in range(ROWS)]
@@ -80,7 +81,9 @@ elif input_method == 'Keyboard':
 
         with col4:
             matrix[row][3] = st.number_input(label="", step=1., format="%.2f", key=f"a{row+1}4")
-            matrix_fulfilled = True
+
+    if st.checkbox("All coefficients were entered"):
+        matrix_fulfilled = True
 
 if matrix_fulfilled:
     method = st.radio("Select method: ", methods_list)
