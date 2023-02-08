@@ -1,3 +1,4 @@
+import numpy as np
 from modules import exact_methods
 
 # main
@@ -30,13 +31,12 @@ if("1" in choice):
         print("Please, restart the program.")
         exit()
 
-    matrix = [[0 for j in range(cols)] for i in range(rows)]
-
+    matrix = np.zeros(rows*cols).reshape(rows, cols)
     for i in range(rows):
         try:
             row_coefficients = input(f"Enter the coefficients of {i+1} equation: ").split(" ")
             for j in range(cols):
-                matrix[i][j] = float(row_coefficients[j])
+                matrix[i, j] = float(row_coefficients[j])
         except ValueError:
             print(invalid_matrix_coefficients)
             print("Please, restart the program.")
@@ -63,13 +63,13 @@ Please check if the file exists and restart the program.
         print("Check if the file data is correct and restart the program.")
         exit()
 
-    matrix = [[0 for j in range(cols)] for i in range(rows)]
+    matrix = np.zeros(rows * cols).reshape(rows, cols)
     try:
         # Reading coefficients
         for i in range(1, (rows+1)):
             row_coefficients = input_list[i].split(" ")
             for j in range(cols):
-                matrix[(i-1)][j] = float(row_coefficients[j])
+                matrix[(i-1), j] = float(row_coefficients[j])
     except ValueError:
         print(invalid_matrix_coefficients)
         print("Check if the file data is correct and restart the program.")
@@ -90,8 +90,8 @@ elif "2" in choice:
 
 else:
     print("""You entered the wrong number.
-          Please restart the program and try again!
-          """)
+         Please restart the program and try again!
+         """)
     exit()
 
 print("\nRoots are: ", end=" ")
@@ -99,5 +99,8 @@ for root in roots_list:
     print("%.5f" % root, end=" ")
 
 print('\n')
+
+
+
 
 

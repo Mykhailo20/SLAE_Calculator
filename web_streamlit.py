@@ -1,6 +1,6 @@
 import streamlit as st
+import numpy as np
 from modules import exact_methods
-from modules import streamlit_check
 
 ROWS = 3
 COLS = 4
@@ -43,44 +43,44 @@ if input_method == 'File':
     if uploaded_file is not None:
         data_list = uploaded_file.getvalue().decode("utf-8").split()
         rows, cols = int(data_list[0]), int(data_list[1])
-        matrix = [[0 for j in range(cols)] for i in range(rows)]
+        matrix = np.zeros(rows*cols).reshape(rows, cols)
         element_counter = 2
         for i in range(rows):
             for j in range(cols):
-                matrix[i][j] = float(data_list[element_counter])
+                matrix[i, j] = float(data_list[element_counter])
                 element_counter += 1
         matrix_fulfilled = True
 
 
 elif input_method == 'Keyboard':
     matrix_fulfilled = False
-    matrix = [[0 for j in range(COLS)] for i in range(ROWS)]
+    matrix = np.zeros(ROWS * COLS).reshape(ROWS, COLS)
     for row in range(ROWS):
         col1, col1_2, col2, col2_2, col3, col3_2, col4, col5 = st.columns([1.2, 0.5, 1.2, 0.5, 1.2, 0.5, 1.2, 5])
 
         with col1:
-            matrix[row][0] = st.number_input(label="", step=1., format="%.2f", key=f"a{row+1}1")
+            matrix[row, 0] = st.number_input(label="", step=1., format="%.2f", key=f"a{row+1}1")
         with col1_2:
             st.text("")
             st.text("")
             st.markdown('<p class="big-font">x1 + </p>', unsafe_allow_html=True)
 
         with col2:
-            matrix[row][1] = st.number_input(label="", step=1., format="%.2f", key=f"a{row+1}2")
+            matrix[row, 1] = st.number_input(label="", step=1., format="%.2f", key=f"a{row+1}2")
         with col2_2:
             st.text("")
             st.text("")
             st.markdown('<p class="big-font">x2 + </p>', unsafe_allow_html=True)
 
         with col3:
-            matrix[row][2] = st.number_input(label="", step=1., format="%.2f", key=f"a{row+1}3")
+            matrix[row, 2] = st.number_input(label="", step=1., format="%.2f", key=f"a{row+1}3")
         with col3_2:
             st.text("")
             st.text("")
             st.markdown('<p class="big-font">x3 = </p>', unsafe_allow_html=True)
 
         with col4:
-            matrix[row][3] = st.number_input(label="", step=1., format="%.2f", key=f"a{row+1}4")
+            matrix[row, 3] = st.number_input(label="", step=1., format="%.2f", key=f"a{row+1}4")
 
     if st.checkbox("All coefficients were entered"):
         matrix_fulfilled = True
