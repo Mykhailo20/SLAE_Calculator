@@ -1,0 +1,8 @@
+1) The file must contain only numerical data  (of integer type (int) or real type (float: the whole part is separated from the fractional point '.').
+2) Numbers must be separated from each other by a space sign (' '). 
+3) The first line of the file must necessarily indicate the dimension of the matrix, in the following lines there should be coefficients of the equation.
+Example:
+3 4
+1.26 -2.34 1.17 3.14
+0.75 1.24 -0.48 -1.17
+3.44 -1.85 1.16 1.83
